@@ -1,4 +1,4 @@
-#include "binary_trees"
+#include "binary_trees.h"
 
 /**
  * binary_tree_node - creates a binary tree node
@@ -15,13 +15,15 @@ binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
 	if (new == NULL)
 		return (NULL);
 
-	parent->left = new;
 	new->right = NULL;
 	new->left = NULL;
 	new->n = value;
 
 	if (parent != NULL)
+	{
 		new->parent = parent;
+		parent->left = new;
+	}
 
 	return (new);
 }
