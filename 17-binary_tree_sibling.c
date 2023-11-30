@@ -9,7 +9,7 @@
  */
 binary_tree_t *binary_tree_sibling(binary_tree_t *node)
 {
-	if (node && node->parent)
+	if (node && node->parent && node->parent->right && node->parent->left))
 	{
 		return (check_node_position(node));
 	}
