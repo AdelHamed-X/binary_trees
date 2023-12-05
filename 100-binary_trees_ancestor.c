@@ -10,28 +10,32 @@
 
 binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second)
 {
-    const binary_tree_t *ancestor = NULL;
+	binary_tree_t *first_non_const = (binary_tree_t *)first;
+	const binary_tree_t *ancestor = NULL;
 
-    /* Traverse upwards from the first node and mark visited nodes */
-    while (first) {
-        first->n *= -1; /* Mark as visited */
-        first = first->parent;
-    }
+	/* Traverse upwards from the first node and mark visited nodes */
+	while (first_non_const)
+	{
+		first_non_const->n *= -1; /* Mark as visited */
+		first_non_const = first_non_const->parent;
+	}
 
-    /* Traverse upwards from the second node and find the first visited node */
-    while (second) {
-        if (second->n < 0) {
-            ancestor = second;
-            break;
-        }
-        second = second->parent;
-    }
+	/* Traverse upwards from the second node and find the first visited node */
+	while (second)
+	{
+		if (second->n < 0)
+		{
+            		ancestor = second;
+           	 	break;
+		}
+		second = second->parent;
+	}
 
     /* Restore the values of visited nodes to their original values */
-    while (first) {
-        first->n *= -1; /* Restore original value */
-        first = first->parent;
-    }
-
-    return (binary_tree_t *)ancestor;
+	while (first_non_const)
+	{
+		first_non_const->n *= -1; /* Restore original value */
+		first_non_const = first_non_const->parent;
+	}
+	return (binary_tree_t *)ancestor;
 }
